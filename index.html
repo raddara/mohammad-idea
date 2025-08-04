@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeSport - رزرو باشگاه های تهران</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6',
+                        secondary: '#A855F7',
+                        dark: '#1F2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Vazirmatn', sans-serif; }
+        .gym-card { transition: all 0.3s ease; }
+        .gym-card:hover { transform: translateY(-5px); }
+        .rating-star { color: #FCD34D; }
+        .available { background: #10B981; }
+        .full { background: #EF4444; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Header -->
+    <header class="bg-black shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <h1 class="text-3xl font-bold text-primary">LifeSport</h1>
+                    <span class="text-gray-300">رزرو باشگاه های تهران</span>
+                </div>
+                <button onclick="showAdminLogin()" class="bg-primary hover:bg-secondary px-4 py-2 rounded-lg transition-colors">
+                    ورود مدیر
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filters -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-primary">فیلتر باشگاه ها</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">منطقه تهران</label>
+                    <select id="districtFilter" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white">
+                        <option value="">همه مناطق</option>
+                        <option value="منطقه 1">منطقه 1</option>
+                        <option value="منطقه 3">منطقه 3</option>
+                        <option value="منطقه 6">منطقه 6</option>
+                        <option value="منطقه 2">منطقه 2</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">نوع ورزش</label>
+                    <select id="sportFilter" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white">
+                        <option value="">همه انواع</option>
+                        <option value="بدنسازی">بدنسازی</option>
+                        <option value="کراس فیت">کراس فیت</option>
+                        <option value="یوگا">یوگا</option>
+                        <option value="شنا">شنا</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">حداقل امتیاز</label>
+                    <select id="ratingFilter" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white">
+                        <option value="">همه امتیازات</option>
+                        <option value="4">4+ ستاره</option>
+                        <option value="4.5">4.5+ ستاره</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gym Cards -->
+        <div id="gymContainer" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Gym 1 -->
+            <div class="gym-card bg-gray-800 rounded-lg overflow-hidden shadow-xl" data-district="منطقه 1" data-sport="بدنسازی" data-rating="4.8">
+                <div class="h-48 bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
+                    <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-primary">باشگاه اولیمپیا</h3>
+                        <div class="flex items-center">
+                            <span class="rating-star">★★★★★</span>
+                            <span class="mr-2 text-sm">4.8</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">باشگاه مدرن بدنسازی با تجهیزات کامل و مربیان حرفه ای. دارای سالن کاردیو و وزنه برداری مجزا.</p>
+                    <div class="space-y-2 mb-4">
+                        <p><span class="text-primary"></span> منطقه 1، خیابان ولیعصر</p>
+                        <p><span class="text-primary"></span> 2,500,000 تومان/ماه</p>
+                        <p><span class="text-primary"></span> 021-88776655</p>
+                        <p><span class="text-primary"></span> www.olympia-gym.ir</p>
+                    </div>
+                    
+                    <!-- Sessions -->
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">سانس های امروز (1403/08/15)</h4>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="available text-center py-2 rounded text-white text-sm">8:00</div>
+                            <div class="full text-center py-2 rounded text-white text-sm">10:00</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">14:00</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">18:00</div>
+                        </div>
+                    </div>
+
+                    <!-- Rules -->
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">مقررات</h4>
+                        <p class="text-sm text-gray-400">لباس ورزشی الزامی، حداکثر 2 ساعت تمرین، رعایت نظافت</p>
+                    </div>
+
+                    <!-- Reviews -->
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">نظرات کاربران</h4>
+                        <div class="bg-gray-700 p-3 rounded text-sm">
+                            <p>"تجهیزات عالی و مربیان حرفه ای" - علی محمدی</p>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-primary hover:bg-secondary py-3 rounded-lg font-semibold transition-colors">
+                        رزرو سانس
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gym 2 -->
+            <div class="gym-card bg-gray-800 rounded-lg overflow-hidden shadow-xl" data-district="منطقه 3" data-sport="کراس فیت" data-rating="4.6">
+                <div class="h-48 bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+                    <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-primary">کراس فیت پاور</h3>
+                        <div class="flex items-center">
+                            <span class="rating-star">★★★★☆</span>
+                            <span class="mr-2 text-sm">4.6</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">مرکز تخصصی کراس فیت با فضای باز و تجهیزات تخصصی. کلاس های گروهی با مربی مجرب.</p>
+                    <div class="space-y-2 mb-4">
+                        <p><span class="text-primary"></span> منطقه 3، میدان آرژانتین</p>
+                        <p><span class="text-primary"></span> 3,200,000 تومان/ماه</p>
+                        <p><span class="text-primary"></span> 021-77889900</p>
+                        <p><span class="text-primary"></span> www.crossfit-power.com</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">سانس های امروز (1403/08/15)</h4>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="full text-center py-2 rounded text-white text-sm">7:00</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">9:00</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">17:00</div>
+                            <div class="full text-center py-2 rounded text-white text-sm">19:00</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">مقررات</h4>
+                        <p class="text-sm text-gray-400">کفش ورزشی مناسب، شرکت در گرم کردن الزامی</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">نظرات کاربران</h4>
+                        <div class="bg-gray-700 p-3 rounded text-sm">
+                            <p>"تمرینات چالش برانگیز و مربی عالی" - سارا احمدی</p>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-primary hover:bg-secondary py-3 rounded-lg font-semibold transition-colors">
+                        رزرو سانس
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gym 3 -->
+            <div class="gym-card bg-gray-800 rounded-lg overflow-hidden shadow-xl" data-district="منطقه 6" data-sport="یوگا" data-rating="4.9">
+                <div class="h-48 bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center">
+                    <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-primary">استودیو یوگا آرامش</h3>
+                        <div class="flex items-center">
+                            <span class="rating-star">★★★★★</span>
+                            <span class="mr-2 text-sm">4.9</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">استودیو آرام یوگا با فضای دلنشین و نورپردازی طبیعی. کلاس های مختلف یوگا و مدیتیشن.</p>
+                    <div class="space-y-2 mb-4">
+                        <p><span class="text-primary"></span> منطقه 6، خیابان گاندی</p>
+                        <p><span class="text-primary"></span> 1,800,000 تومان/ماه</p>
+                        <p><span class="text-primary"></span> 021-66554433</p>
+                        <p><span class="text-primary"></span> www.yoga-peace.ir</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">سانس های امروز (1403/08/15)</h4>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="available text-center py-2 rounded text-white text-sm">6:30</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">8:30</div>
+                            <div class="full text-center py-2 rounded text-white text-sm">16:00</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">18:30</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">مقررات</h4>
+                        <p class="text-sm text-gray-400">حضور 10 دقیقه زودتر، سکوت در سالن، مت شخصی</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">نظرات کاربران</h4>
+                        <div class="bg-gray-700 p-3 rounded text-sm">
+                            <p>"فضای فوق العاده آرام و مربی صبور" - مریم رضایی</p>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-primary hover:bg-secondary py-3 rounded-lg font-semibold transition-colors">
+                        رزرو سانس
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gym 4 -->
+            <div class="gym-card bg-gray-800 rounded-lg overflow-hidden shadow-xl" data-district="منطقه 2" data-sport="شنا" data-rating="4.7">
+                <div class="h-48 bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+                    <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22 21c-1.11 0-1.73-.37-2.18-.64-.37-.22-.6-.36-1.15-.36-.56 0-.78.13-1.15.36-.46.27-1.07.64-2.18.64s-1.73-.37-2.18-.64c-.37-.22-.6-.36-1.15-.36-.56 0-.78.13-1.15.36-.46.27-1.07.64-2.18.64s-1.73-.37-2.18-.64c-.37-.22-.6-.36-1.15-.36-.56 0-.78.13-1.15.36-.46.27-1.07.64-2.18.64v-2c.56 0 .78-.13 1.15-.36.46-.27 1.07-.64 2.18-.64s1.73.37 2.18.64c.37.22.6.36 1.15.36.56 0 .78-.13 1.15-.36.46-.27 1.07-.64 2.18-.64s1.73.37 2.18.64c.37.22.6.36 1.15.36.56 0 .78-.13 1.15-.36.46-.27 1.07-.64 2.18-.64s1.73.37 2.18.64c.37.22.6.36 1.15.36v2zM16.5 8c.83 0 1.5-.67 1.5-1.5 0-.83-.67-1.5-1.5-1.5S15 5.67 15 6.5c0 .83.67 1.5 1.5 1.5zM12.5 11.5c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5zm3-4c.28 0 .5-.22.5-.5s-.22-.5-.5-.5-.5.22-.5.5.22.5.5.5z"/>
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-primary">مجموعه آبی دلفین</h3>
+                        <div class="flex items-center">
+                            <span class="rating-star">★★★★☆</span>
+                            <span class="mr-2 text-sm">4.7</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">استخر سرپوشیده با آب گرم و سیستم تصفیه مدرن. کلاس های شنا برای تمام سطوح.</p>
+                    <div class="space-y-2 mb-4">
+                        <p><span class="text-primary"></span> منطقه 2، خیابان کریمخان</p>
+                        <p><span class="text-primary"></span> 2,800,000 تومان/ماه</p>
+                        <p><span class="text-primary"></span> 021-88990011</p>
+                        <p><span class="text-primary"></span> www.dolphin-pool.com</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">سانس های امروز (1403/08/15)</h4>
+                        <div class="grid grid-cols-4 gap-2">
+                            <div class="available text-center py-2 rounded text-white text-sm">7:00</div>
+                            <div class="full text-center py-2 rounded text-white text-sm">9:00</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">15:00</div>
+                            <div class="available text-center py-2 rounded text-white text-sm">20:00</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">مقررات</h4>
+                        <p class="text-sm text-gray-400">کلاه شنا الزامی، دوش قبل ورود، ممنوعیت غذا</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2 text-primary">نظرات کاربران</h4>
+                        <div class="bg-gray-700 p-3 rounded text-sm">
+                            <p>"آب تمیز و مربی شنای عالی" - حسین کریمی</p>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-primary hover:bg-secondary py-3 rounded-lg font-semibold transition-colors">
+                        رزرو سانس
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-gray-800 p-8 rounded-lg max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold mb-4 text-primary">ورود مدیر</h3>
+            <input type="password" id="adminPassword" placeholder="رمز عبور" class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 mb-4 text-white">
+            <div class="flex space-x-4 space-x-reverse">
+                <button onclick="checkAdminPassword()" class="bg-primary hover:bg-secondary px-4 py-2 rounded-lg flex-1">ورود</button>
+                <button onclick="hideAdminLogin()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg flex-1">انصراف</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-gray-800 p-8 rounded-lg max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+            <h3 class="text-xl font-bold mb-4 text-primary">پنل مدیریت</h3>
+            <p class="text-gray-300 mb-4">در اینجا می‌توانید باشگاه‌ها را مدیریت کنید، سانس‌ها را تغییر دهید و نظرات را بررسی کنید.</p>
+            <div class="space-y-4">
+                <button class="w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg">افزودن باشگاه جدید</button>
+                <button class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg">مدیریت سانس‌ها</button>
+                <button class="w-full bg-yellow-600 hover:bg-yellow-700 py-2 rounded-lg">بررسی نظرات</button>
+                <button onclick="hideAdminPanel()" class="w-full bg-gray-600 hover:bg-gray-700 py-2 rounded-lg">خروج</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        function filterGyms() {
+            const district = document.getElementById('districtFilter').value;
+            const sport = document.getElementById('sportFilter').value;
+            const rating = parseFloat(document.getElementById('ratingFilter').value) || 0;
+            
+            const gymCards = document.querySelectorAll('.gym-card');
+            
+            gymCards.forEach(card => {
+                const cardDistrict = card.dataset.district;
+                const cardSport = card.dataset.sport;
+                const cardRating = parseFloat(card.dataset.rating);
+                
+                const districtMatch = !district || cardDistrict === district;
+                const sportMatch = !sport || cardSport === sport;
+                const ratingMatch = cardRating >= rating;
+                
+                if (districtMatch && sportMatch && ratingMatch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add event listeners to filters
+        document.getElementById('districtFilter').addEventListener('change', filterGyms);
+        document.getElementById('sportFilter').addEventListener('change', filterGyms);
+        document.getElementById('ratingFilter').addEventListener('change', filterGyms);
+
+        // Admin functions
+        function showAdminLogin() {
+            document.getElementById('adminModal').classList.remove('hidden');
+            document.getElementById('adminModal').classList.add('flex');
+        }
+
+        function hideAdminLogin() {
+            document.getElementById('adminModal').classList.add('hidden');
+            document.getElementById('adminModal').classList.remove('flex');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function checkAdminPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === '2010') {
+                hideAdminLogin();
+                document.getElementById('adminPanel').classList.remove('hidden');
+                document.getElementById('adminPanel').classList.add('flex');
+            } else {
+                alert('رمز عبور اشتباه است!');
+            }
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('adminPanel').classList.add('hidden');
+            document.getElementById('adminPanel').classList.remove('flex');
+        }
+
+        // Reservation functionality
+        document.querySelectorAll('button:contains("رزرو سانس")').forEach(button => {
+            if (button.textContent.includes('رزرو سانس')) {
+                button.addEventListener('click', function() {
+                    alert('رزرو با موفقیت انجام شد! کد رزرو: ' + Math.random().toString(36).substr(2, 9).toUpperCase());
+                });
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'969da0b5c48fd34e',t:'MTc1NDMwNjAzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
